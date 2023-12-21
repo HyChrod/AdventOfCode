@@ -2,10 +2,7 @@ package de.flsc.AdventOfCode.Solutions;
 
 import de.flsc.AdventOfCode.Utilities.AbstractPuzzleProblem;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Day9 extends AbstractPuzzleProblem<Long> {
 
@@ -42,12 +39,12 @@ public class Day9 extends AbstractPuzzleProblem<Long> {
             List<List<Integer>> numHistories = createNumberHistory(line);
             List<Integer> currentLine = numHistories.get(numHistories.size()-1);
             for(int i = (numHistories.size()-2); i >= 0; i--) {
-                List<Integer> nextLine = new ArrayList<>(numHistories.get(i));
-                nextLine.set(0, nextLine.get(0)-currentLine.get(0));
+                LinkedList<Integer> nextLine = new LinkedList<>(numHistories.get(i));
+                nextLine.addFirst(nextLine.get(0)-currentLine.get(0));
                 numHistories.set(i, nextLine);
                 currentLine = nextLine;
             }
-            reportValue += currentLine.get(currentLine.size()-1);
+            reportValue += currentLine.get(0);
         }
         return reportValue;
     }
